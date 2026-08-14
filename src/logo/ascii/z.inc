@@ -49,6 +49,18 @@ static const FFlogo Z[] = {
         .colorTitle = FF_COLOR_FG_BLUE,
     },
     #endif
+    #ifdef FASTFETCH_DATATEXT_LOGO_ZIMAOS
+    // ZimaOS
+    {
+        .names = { "ZimaOS", "zimaos" },
+        .lines = FASTFETCH_DATATEXT_LOGO_ZIMAOS,
+        .colors = {
+            FF_COLOR_FG_WHITE,
+        },
+        .colorKeys = FF_COLOR_FG_BLUE,
+        .colorTitle = FF_COLOR_FG_BLUE,
+    },
+    #endif
     // LAST
     {},
 };
