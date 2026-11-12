@@ -60,6 +60,7 @@ void ffParseBoardJsonObject(FFBoardOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateBoardJsonConfig(FFBoardOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -112,15 +113,24 @@ FFModuleBaseInfo ffBoardModuleInfo = {
     .description = "Print motherboard name and other information",
     .displayName = {
         .en = "Board",
+        .ar = "اللوحة الأم",
+        .cs = "Základní deska",
         .de = "Mainboard",
         .es = "Placa base",
+        .fi = "Emolevy",
         .fr = "Carte mère",
+        .gl = "Placa base",
+        .he = "לוח אם",
+        .id = "Papan Induk",
         .it = "Scheda madre",
         .ja = "マザーボード",
         .ko = "메인보드",
         .pl = "Płyta główna",
-        .pt_BR = "Placa-mãe",
+        .pt = "Placa-mãe",
         .ru = "Материнская плата",
+        .tr = "Anakart",
+        .uk = "Материнська плата",
+        .vi = "Bo mạch chủ",
         .zh_CN = "主板",
         .zh_TW = "主機板",
     },

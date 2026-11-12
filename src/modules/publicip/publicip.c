@@ -62,6 +62,7 @@ void ffParsePublicIpJsonObject(FFPublicIPOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGeneratePublicIpJsonConfig(FFPublicIPOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -112,15 +113,24 @@ FFModuleBaseInfo ffPublicIPModuleInfo = {
     .description = "Print your public IP address and related information",
     .displayName = {
         .en = "Public IP",
+        .ar = "عنوان IP العام",
+        .cs = "Veřejná IP",
         .de = "Öffentliche IP",
         .es = "IP pública",
+        .fi = "Julkinen IP",
         .fr = "IP publique",
+        .gl = "IP pública",
+        .he = "IP ציבורי",
+        .id = "IP Publik",
         .it = "IP pubblica",
         .ja = "パブリックIP",
         .ko = "공용 IP",
         .pl = "Publiczne IP",
-        .pt_BR = "IP público",
-        .ru = "Публичный IP",
+        .pt = "IP público",
+        .ru = "Внешний IP",
+        .tr = "Genel IP",
+        .uk = "Публічна IP",
+        .vi = "IP công khai",
         .zh_CN = "公网 IP",
         .zh_TW = "公網 IP",
     },
@@ -134,5 +144,5 @@ FFModuleBaseInfo ffPublicIPModuleInfo = {
         { "Public IP address", "ip" },
         { "Location", "location" },
     })),
-    .defaultOrder = 48,
+    .defaultOrder = 49,
 };

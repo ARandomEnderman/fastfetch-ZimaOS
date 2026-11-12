@@ -11,7 +11,7 @@ bool ffPrintKernel(FFKernelOptions* options) {
         printf("%s %s\n", info->name.chars, info->release.chars);
     } else {
         FF_STRBUF_AUTO_DESTROY str = ffStrbufCreate();
-        ffSizeAppendNum(info->pageSize, &str);
+        ffSizeAppendNum((uint64_t) 1 << info->pageSizeShift, &str);
         FF_PRINT_FORMAT_CHECKED(FF_MODULE_GET_DISPLAY_NAME(Kernel), 0, &options->moduleArgs, FF_PRINT_TYPE_DEFAULT, ((FFformatarg[]) {
                                                                                                            FF_ARG(info->name, "sysname"),
                                                                                                            FF_ARG(info->release, "release"),
@@ -36,6 +36,7 @@ void ffParseKernelJsonObject(FFKernelOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateKernelJsonConfig(FFKernelOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -48,7 +49,7 @@ bool ffGenerateKernelJsonResult([[maybe_unused]] FFKernelOptions* options, yyjso
     yyjson_mut_obj_add_strbuf(doc, obj, "name", &info->name);
     yyjson_mut_obj_add_strbuf(doc, obj, "release", &info->release);
     yyjson_mut_obj_add_strbuf(doc, obj, "version", &info->version);
-    yyjson_mut_obj_add_uint(doc, obj, "pageSize", info->pageSize);
+    yyjson_mut_obj_add_uint(doc, obj, "pageSize", (uint64_t) 1 << info->pageSizeShift);
 
     return true;
 }
@@ -66,15 +67,24 @@ FFModuleBaseInfo ffKernelModuleInfo = {
     .description = "Print system kernel version",
     .displayName = {
         .en = "Kernel",
+        .ar = "النواة",
+        .cs = "Jádro",
         .de = "Kernel",
         .es = "Kernel",
+        .fi = "Ydin",
         .fr = "Kernel",
+        .gl = "Kernel",
+        .he = "ליבה",
+        .id = "Kernel",
         .it = "Kernel",
         .ja = "カーネル",
         .ko = "커널",
         .pl = "Jądro",
-        .pt_BR = "Kernel",
+        .pt = "Kernel",
         .ru = "Ядро",
+        .tr = "Çekirdek",
+        .uk = "Ядро",
+        .vi = "Nhân",
         .zh_CN = "内核",
         .zh_TW = "核心",
     },
@@ -89,7 +99,6 @@ FFModuleBaseInfo ffKernelModuleInfo = {
         { "Release", "release" },
         { "Version", "version" },
         { "Architecture", "arch" },
-        { "Display version", "display-version" },
         { "Page size", "page-size" },
     })),
     .defaultOrder = 9,

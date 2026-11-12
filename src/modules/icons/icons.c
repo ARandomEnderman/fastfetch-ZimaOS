@@ -56,6 +56,7 @@ void ffParseIconsJsonObject(FFIconsOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateIconsJsonConfig(FFIconsOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -98,15 +99,24 @@ FFModuleBaseInfo ffIconsModuleInfo = {
     .description = "Print icon style name",
     .displayName = {
         .en = "Icons",
+        .ar = "الأيقونات",
+        .cs = "Ikony",
         .de = "Symbole",
         .es = "Iconos",
+        .fi = "Kuvakkeet",
         .fr = "Icônes",
+        .gl = "Iconas",
+        .he = "סמלים",
+        .id = "Ikon",
         .it = "Icone",
         .ja = "アイコン",
         .ko = "아이콘",
         .pl = "Ikony",
-        .pt_BR = "Ícones",
+        .pt = "Ícones",
         .ru = "Иконки",
+        .tr = "Simgeler",
+        .uk = "Піктограми",
+        .vi = "Biểu tượng",
         .zh_CN = "图标",
         .zh_TW = "圖示",
     },

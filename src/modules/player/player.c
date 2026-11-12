@@ -89,6 +89,7 @@ void ffParsePlayerJsonObject(FFPlayerOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGeneratePlayerJsonConfig(FFPlayerOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -111,15 +112,24 @@ FFModuleBaseInfo ffPlayerModuleInfo = {
     .description = "Print the music player name that is currently active",
     .displayName = {
         .en = "Media Player",
+        .ar = "مشغل الوسائط",
+        .cs = "Přehrávač médií",
         .de = "Medienplayer",
         .es = "Reproductor multimedia",
+        .fi = "Mediasoitin",
         .fr = "Lecteur multimédia",
+        .gl = "Reprodutor multimedia",
+        .he = "נגן מדיה",
+        .id = "Pemutar Media",
         .it = "Lettore multimediale",
         .ja = "メディアプレイヤー",
         .ko = "미디어 플레이어",
         .pl = "Odtwarzacz multimediów",
-        .pt_BR = "Reprodutor de mídia",
+        .pt = "Reprodutor de mídia",
         .ru = "Медиаплеер",
+        .tr = "Medya Oynatıcı",
+        .uk = "Медіаплеєр",
+        .vi = "Trình phát phương tiện",
         .zh_CN = "媒体播放器",
         .zh_TW = "媒體播放器",
     },
@@ -135,5 +145,5 @@ FFModuleBaseInfo ffPlayerModuleInfo = {
         { "Player Identifier", "id" },
         { "URL name", "url" },
     })),
-    .defaultOrder = 46,
+    .defaultOrder = 47,
 };

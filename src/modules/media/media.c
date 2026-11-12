@@ -205,6 +205,7 @@ void ffParseMediaJsonObject(FFMediaOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateMediaJsonConfig(FFMediaOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -257,15 +258,24 @@ FFModuleBaseInfo ffMediaModuleInfo = {
     .description = "Print the name of the currently playing song",
     .displayName = {
         .en = "Media",
+        .ar = "الوسائط",
+        .cs = "Média",
         .de = "Medien",
-        .es = "Medios",
+        .es = "Multimedia",
+        .fi = "Multimedia",
         .fr = "Médias",
+        .gl = "Multimedia",
+        .he = "מדיה",
+        .id = "Media",
         .it = "Media",
         .ja = "メディア",
         .ko = "미디어",
         .pl = "Media",
-        .pt_BR = "Mídia",
+        .pt = "Mídia",
         .ru = "Медиа",
+        .tr = "Medya",
+        .uk = "Медіа",
+        .vi = "Phương tiện",
         .zh_CN = "媒体",
         .zh_TW = "媒體",
     },
@@ -288,5 +298,5 @@ FFModuleBaseInfo ffMediaModuleInfo = {
         { "Player ID", "player-id" },
         { "URL", "url" },
     })),
-    .defaultOrder = 47,
+    .defaultOrder = 48,
 };

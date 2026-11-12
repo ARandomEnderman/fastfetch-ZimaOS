@@ -58,6 +58,7 @@ void ffParseInitSystemJsonObject(FFInitSystemOptions* options, yyjson_val* modul
     }
 }
 
+[[gnu::cold]]
 void ffGenerateInitSystemJsonConfig(FFInitSystemOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -105,15 +106,24 @@ FFModuleBaseInfo ffInitSystemModuleInfo = {
     .description = "Print init system (pid 1) name and version",
     .displayName = {
         .en = "Init System",
+        .ar = "نظام الإقلاع",
+        .cs = "Init systém",
         .de = "Init-System",
         .es = "Sistema de inicio",
+        .fi = "Init-järjestelmä",
         .fr = "Système d'init",
+        .gl = "Sistema de inicio",
+        .he = "מערכת אתחול",
+        .id = "Sistem Init",
         .it = "Sistema di init",
         .ja = "initシステム",
         .ko = "초기화 시스템",
         .pl = "System init",
-        .pt_BR = "Sistema de inicialização",
-        .ru = "Init-система",
+        .pt = "Sistema de inicialização",
+        .ru = "Система инициализации",
+        .tr = "Init Sistemi",
+        .uk = "Init-система",
+        .vi = "Hệ thống init",
         .zh_CN = "Init 系统",
         .zh_TW = "Init 系統",
     },

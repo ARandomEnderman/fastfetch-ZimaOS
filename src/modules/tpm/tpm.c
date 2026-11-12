@@ -48,6 +48,7 @@ void ffParseTPMJsonObject(FFTPMOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateTPMJsonConfig(FFTPMOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -87,15 +88,24 @@ FFModuleBaseInfo ffTPMModuleInfo = {
     .description = "Print information about the Trusted Platform Module (TPM) security device",
     .displayName = {
         .en = "TPM",
+        .ar = "TPM",
+        .cs = "TPM",
         .de = "TPM",
         .es = "TPM",
+        .fi = "TPM",
         .fr = "TPM",
+        .gl = "TPM",
+        .he = "TPM",
+        .id = "TPM",
         .it = "TPM",
         .ja = "TPM",
         .ko = "TPM",
         .pl = "TPM",
-        .pt_BR = "TPM",
+        .pt = "TPM",
         .ru = "TPM",
+        .tr = "TPM",
+        .uk = "TPM",
+        .vi = "TPM",
         .zh_CN = "TPM",
         .zh_TW = "TPM",
     },
@@ -109,5 +119,5 @@ FFModuleBaseInfo ffTPMModuleInfo = {
         { "TPM device version", "version" },
         { "TPM general description", "description" },
     })),
-    .defaultOrder = 69,
+    .defaultOrder = 70,
 };

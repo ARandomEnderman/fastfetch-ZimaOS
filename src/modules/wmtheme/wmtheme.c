@@ -35,6 +35,7 @@ void ffParseWMThemeJsonObject(FFWMThemeOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateWMThemeJsonConfig(FFWMThemeOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -63,15 +64,24 @@ FFModuleBaseInfo ffWMThemeModuleInfo = {
     .description = "Print the current window manager theme",
     .displayName = {
         .en = "WM Theme",
+        .ar = "سمة مدير النوافذ",
+        .cs = "Motiv správce oken",
         .de = "Fenstermanager-Thema",
         .es = "Tema del gestor de ventanas",
+        .fi = "Ikkunointijärjestelmän Teema",
         .fr = "Thème du gestionnaire de fenêtres",
+        .gl = "Tema do xestor de xanelas",
+        .he = "ערכת נושא של מנהל חלונות",
+        .id = "Tema Manajer Jendela",
         .it = "Tema del gestore finestre",
         .ja = "ウィンドウマネージャのテーマ",
         .ko = "윈도우 관리자 테마",
         .pl = "Motyw menedżera okien",
-        .pt_BR = "Tema do gerenciador de janelas",
+        .pt = "Tema do gerenciador de janelas",
         .ru = "Тема менеджера окон",
+        .tr = "WM Teması",
+        .uk = "Тема менеджера вікон",
+        .vi = "Chủ đề trình quản lý cửa sổ",
         .zh_CN = "窗口管理器主题",
         .zh_TW = "視窗管理員主題",
     },

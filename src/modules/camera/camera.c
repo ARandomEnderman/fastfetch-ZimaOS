@@ -71,6 +71,7 @@ void ffParseCameraJsonObject(FFCameraOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateCameraJsonConfig(FFCameraOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -119,15 +120,24 @@ FFModuleBaseInfo ffCameraModuleInfo = {
     .description = "Print available cameras",
     .displayName = {
         .en = "Camera",
+        .ar = "الكاميرا",
+        .cs = "Kamera",
         .de = "Kamera",
         .es = "Cámara",
+        .fi = "Kamera",
         .fr = "Caméra",
+        .gl = "Cámara",
+        .he = "מצלמה",
+        .id = "Kamera",
         .it = "Fotocamera",
         .ja = "カメラ",
         .ko = "카메라",
         .pl = "Kamera",
-        .pt_BR = "Câmera",
+        .pt = "Câmera",
         .ru = "Камера",
+        .tr = "Kamera",
+        .uk = "Камера",
+        .vi = "Máy ảnh",
         .zh_CN = "摄像头",
         .zh_TW = "攝像頭",
     },
@@ -145,5 +155,5 @@ FFModuleBaseInfo ffCameraModuleInfo = {
         { "Width (in px)", "width" },
         { "Height (in px)", "height" },
     })),
-    .defaultOrder = 61,
+    .defaultOrder = 62,
 };

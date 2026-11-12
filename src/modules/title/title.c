@@ -128,6 +128,7 @@ void ffParseTitleJsonObject(FFTitleOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateTitleJsonConfig(FFTitleOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -180,15 +181,24 @@ FFModuleBaseInfo ffTitleModuleInfo = {
     .description = "Print the title, including your username and hostname",
     .displayName = {
         .en = "Title",
+        .ar = "العنوان",
+        .cs = "Titulek",
         .de = "Titel",
         .es = "Título",
+        .fi = "Otsikko",
         .fr = "Titre",
+        .gl = "Título",
+        .he = "כותרת",
+        .id = "Judul",
         .it = "Titolo",
         .ja = "タイトル",
         .ko = "제목",
         .pl = "Tytuł",
-        .pt_BR = "Título",
+        .pt = "Título",
         .ru = "Заголовок",
+        .tr = "Başlık",
+        .uk = "Заголовок",
+        .vi = "Tiêu đề",
         .zh_CN = "标题",
         .zh_TW = "標題",
     },

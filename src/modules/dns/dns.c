@@ -84,6 +84,7 @@ void ffParseDNSJsonObject(FFDNSOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateDNSJsonConfig(FFDNSOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -138,15 +139,24 @@ FFModuleBaseInfo ffDNSModuleInfo = {
     .description = "Print configured DNS servers",
     .displayName = {
         .en = "DNS",
+        .ar = "DNS",
+        .cs = "DNS",
         .de = "DNS",
         .es = "DNS",
+        .fi = "DNS",
         .fr = "DNS",
+        .gl = "DNS",
+        .he = "DNS",
+        .id = "DNS",
         .it = "DNS",
         .ja = "DNS",
         .ko = "DNS",
         .pl = "DNS",
-        .pt_BR = "DNS",
+        .pt = "DNS",
         .ru = "DNS",
+        .tr = "DNS",
+        .uk = "DNS",
+        .vi = "DNS",
         .zh_CN = "DNS",
         .zh_TW = "DNS",
     },
@@ -159,5 +169,5 @@ FFModuleBaseInfo ffDNSModuleInfo = {
     .formatArgs = FF_FORMAT_ARG_LIST(((FFModuleFormatArg[]) {
         { "DNS result", "result" },
     })),
-    .defaultOrder = 50,
+    .defaultOrder = 51,
 };

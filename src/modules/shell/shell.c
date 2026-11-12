@@ -50,6 +50,7 @@ void ffParseShellJsonObject(FFShellOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateShellJsonConfig(FFShellOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -93,17 +94,26 @@ FFModuleBaseInfo ffShellModuleInfo = {
     .description = "Print the current shell name and version",
     .displayName = {
         .en = "Shell",
+        .ar = "الصدفة",
+        .cs = "Shell",
         .de = "Shell",
         .es = "Shell",
+        .fi = "Komentotulkki",
         .fr = "Shell",
+        .gl = "Shell",
+        .he = "מעטפת",
+        .id = "Shell",
         .it = "Shell",
         .ja = "シェル",
         .ko = "셸",
         .pl = "Powłoka",
-        .pt_BR = "Shell",
+        .pt = "Shell",
         .ru = "Оболочка",
-        .zh_CN = "Shell",
-        .zh_TW = "Shell",
+        .tr = "Kabuk",
+        .uk = "Оболонка",
+        .vi = "Shell",
+        .zh_CN = "命令行解释器",
+        .zh_TW = "命令列直譯器",
     },
     .initOptions = (void*) ffInitShellOptions,
     .destroyOptions = (void*) ffDestroyShellOptions,

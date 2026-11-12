@@ -53,6 +53,7 @@ void ffParseFontJsonObject(FFFontOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateFontJsonConfig(FFFontOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -99,15 +100,24 @@ FFModuleBaseInfo ffFontModuleInfo = {
     .description = "Print system font names",
     .displayName = {
         .en = "Font",
+        .ar = "الخط",
+        .cs = "Písmo",
         .de = "Schriftart",
         .es = "Fuente",
+        .fi = "Fontti",
         .fr = "Police",
+        .gl = "Fonte",
+        .he = "גופן",
+        .id = "Font",
         .it = "Carattere",
         .ja = "フォント",
         .ko = "글꼴",
         .pl = "Czcionka",
-        .pt_BR = "Fonte",
+        .pt = "Fonte",
         .ru = "Шрифт",
+        .tr = "Yazı Tipi",
+        .uk = "Шрифт",
+        .vi = "Phông chữ",
         .zh_CN = "字体",
         .zh_TW = "字型",
     },

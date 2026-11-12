@@ -50,6 +50,7 @@ void ffParseWallpaperJsonObject(FFWallpaperOptions* options, yyjson_val* module)
     }
 }
 
+[[gnu::cold]]
 void ffGenerateWallpaperJsonConfig(FFWallpaperOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -79,15 +80,24 @@ FFModuleBaseInfo ffWallpaperModuleInfo = {
     .description = "Print the file path of the current wallpaper",
     .displayName = {
         .en = "Wallpaper",
+        .ar = "الخلفية",
+        .cs = "Tapeta",
         .de = "Hintergrundbild",
         .es = "Fondo de pantalla",
+        .fi = "Taustakuva",
         .fr = "Fond d'écran",
+        .gl = "Fondo de escritorio",
+        .he = "טפט",
+        .id = "Wallpaper",
         .it = "Sfondo",
         .ja = "壁紙",
         .ko = "배경화면",
         .pl = "Tapeta",
-        .pt_BR = "Papel de parede",
+        .pt = "Papel de parede",
         .ru = "Обои",
+        .tr = "Duvar Kağıdı",
+        .uk = "Шпалери",
+        .vi = "Hình nền",
         .zh_CN = "壁纸",
         .zh_TW = "桌布",
     },

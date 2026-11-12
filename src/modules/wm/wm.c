@@ -76,6 +76,7 @@ void ffParseWMJsonObject(FFWMOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateWMJsonConfig(FFWMOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -123,16 +124,25 @@ FFModuleBaseInfo ffWMModuleInfo = {
     .name = "WM",
     .description = "Print the window manager name and version",
     .displayName = {
-        .en = "WM",
+        .en = "Window Manager",
+        .ar = "مدير النوافذ",
+        .cs = "Správce oken",
         .de = "Fenstermanager",
         .es = "Gestor de ventanas",
+        .fi = "Ikkunointijärjestelmä",
         .fr = "Gestionnaire de fenêtres",
+        .gl = "Xestor de xanelas",
+        .he = "מנהל חלונות",
+        .id = "Manajer Jendela",
         .it = "Gestore finestre",
         .ja = "ウィンドウマネージャー",
         .ko = "윈도우 관리자",
         .pl = "Menedżer okien",
-        .pt_BR = "Gerenciador de janelas",
+        .pt = "Gerenciador de janelas",
         .ru = "Менеджер окон",
+        .tr = "Pencere Yöneticisi",
+        .uk = "Менеджер вікон",
+        .vi = "Trình quản lý cửa sổ",
         .zh_CN = "窗口管理器",
         .zh_TW = "視窗管理員",
     },

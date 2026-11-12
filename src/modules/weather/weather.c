@@ -52,6 +52,7 @@ void ffParseWeatherJsonObject(FFWeatherOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateWeatherJsonConfig(FFWeatherOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -96,15 +97,24 @@ FFModuleBaseInfo ffWeatherModuleInfo = {
     .description = "Print weather information",
     .displayName = {
         .en = "Weather",
+        .ar = "الطقس",
+        .cs = "Počasí",
         .de = "Wetter",
-        .es = "Clima",
+        .es = "Tiempo",
+        .fi = "Sää",
         .fr = "Météo",
+        .gl = "Tempo",
+        .he = "מזג אוויר",
+        .id = "Cuaca",
         .it = "Meteo",
         .ja = "天気",
         .ko = "날씨",
         .pl = "Pogoda",
-        .pt_BR = "Clima",
+        .pt = "Clima",
         .ru = "Погода",
+        .tr = "Hava Durumu",
+        .uk = "Погода",
+        .vi = "Thời tiết",
         .zh_CN = "天气",
         .zh_TW = "天氣",
     },
@@ -117,5 +127,5 @@ FFModuleBaseInfo ffWeatherModuleInfo = {
     .formatArgs = FF_FORMAT_ARG_LIST(((FFModuleFormatArg[]) {
         { "Weather result", "result" },
     })),
-    .defaultOrder = 65,
+    .defaultOrder = 66,
 };

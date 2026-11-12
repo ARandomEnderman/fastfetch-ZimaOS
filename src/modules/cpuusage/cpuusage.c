@@ -129,7 +129,10 @@ void ffParseCPUUsageJsonObject(FFCPUUsageOptions* options, yyjson_val* module) {
         }
 
         if (unsafe_yyjson_equals_str(key, "waitTime")) {
-            options->waitTime = (uint32_t) yyjson_get_uint(val);
+            if (!ffJsonConfigParseUInt32(val, &options->waitTime, UINT32_MAX)) {
+                ffPrintError(FF_MODULE_GET_DISPLAY_NAME(CPUUsage), 0, &options->moduleArgs, FF_PRINT_TYPE_DEFAULT, "Property 'waitTime' must be a non-negative integer no greater than 4294967295");
+                continue;
+            }
             continue;
         }
 
@@ -141,6 +144,7 @@ void ffParseCPUUsageJsonObject(FFCPUUsageOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateCPUUsageJsonConfig(FFCPUUsageOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -183,15 +187,24 @@ FFModuleBaseInfo ffCPUUsageModuleInfo = {
     .description = "Print CPU usage. Collecting data takes some time",
     .displayName = {
         .en = "CPU Usage",
+        .ar = "استخدام المعالج",
+        .cs = "Využití CPU",
         .de = "CPU-Auslastung",
-        .es = "Uso del CPU",
+        .es = "Uso de la CPU",
+        .fi = "Suorittimen Käyttö",
         .fr = "Utilisation du CPU",
+        .gl = "Uso da CPU",
+        .he = "שימוש במעבד",
+        .id = "Penggunaan CPU",
         .it = "Utilizzo della CPU",
         .ja = "CPU使用率",
         .ko = "CPU 사용량",
         .pl = "Użycie CPU",
-        .pt_BR = "Uso da CPU",
-        .ru = "Использование ЦП",
+        .pt = "Uso da CPU",
+        .ru = "Использование процессора",
+        .tr = "CPU Kullanımı",
+        .uk = "Використання ЦП",
+        .vi = "Mức sử dụng CPU",
         .zh_CN = "CPU使用率",
         .zh_TW = "CPU使用率",
     },

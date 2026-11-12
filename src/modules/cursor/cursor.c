@@ -62,6 +62,7 @@ void ffParseCursorJsonObject(FFCursorOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateCursorJsonConfig(FFCursorOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -104,15 +105,24 @@ FFModuleBaseInfo ffCursorModuleInfo = {
     .description = "Print cursor style name",
     .displayName = {
         .en = "Cursor",
+        .ar = "المؤشر",
+        .cs = "Kurzor",
         .de = "Mauszeiger",
         .es = "Cursor",
+        .fi = "Kursori",
         .fr = "Curseur",
+        .gl = "Cursor",
+        .he = "סמן",
+        .id = "Kursor",
         .it = "Cursore",
         .ja = "カーソル",
         .ko = "커서",
         .pl = "Kursor",
-        .pt_BR = "Cursor",
+        .pt = "Cursor",
         .ru = "Курсор",
+        .tr = "İmleç",
+        .uk = "Курсор",
+        .vi = "Con trỏ",
         .zh_CN = "光标",
         .zh_TW = "游標",
     },

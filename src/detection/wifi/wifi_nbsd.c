@@ -1,6 +1,10 @@
 #include "wifi.h"
+#include "common/debug.h"
 #include "common/io.h"
 #include "common/strutil.h"
+
+#include <errno.h>
+#include <string.h>
 
 #define COMPAT_FREEBSD_NET80211 1
 #include <sys/ioctl.h>
@@ -21,11 +25,13 @@
 const char* ffDetectWifi(FFlist* result) {
     struct if_nameindex* infs = if_nameindex();
     if (!infs) {
+        FF_DEBUG("if_nameindex() failed: %s", strerror(errno));
         return "if_nameindex() failed";
     }
 
     FF_AUTO_CLOSE_FD int sock = socket(AF_INET, SOCK_DGRAM, 0);
     if (sock < 0) {
+        FF_DEBUG("socket(AF_INET, SOCK_DGRAM) failed: %s", strerror(errno));
         if_freenameindex(infs);
         return "socket() failed";
     }
@@ -47,6 +53,7 @@ const char* ffDetectWifi(FFlist* result) {
         item->conn.rxRate = -DBL_MAX;
         item->conn.txRate = -DBL_MAX;
         item->conn.channel = 0;
+        item->conn.channelWidth = 0;
         item->conn.frequency = 0;
 
         char ssid[IEEE80211_NWID_LEN + 1] = {};
@@ -90,6 +97,16 @@ const char* ffDetectWifi(FFlist* result) {
             // item->conn.channel = curchan.ic_ieee; // No ic_ieee in NetBSD
             item->conn.channel = ffWifiFreqToChannel(curchan.ic_freq);
             item->conn.frequency = curchan.ic_freq;
+
+            // Determine channel width from channel flags
+            if (curchan.ic_flags & IEEE80211_CHAN_VHT160)
+                item->conn.channelWidth = 160;
+            else if (curchan.ic_flags & IEEE80211_CHAN_VHT80)
+                item->conn.channelWidth = 80;
+            else if (curchan.ic_flags & IEEE80211_CHAN_HT40)
+                item->conn.channelWidth = 40;
+            else
+                item->conn.channelWidth = 20;
 
 #ifdef IEEE80211_IS_CHAN_HE // for future use
             if (IEEE80211_IS_CHAN_HE(&curchan)) {

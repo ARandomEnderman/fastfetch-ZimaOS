@@ -52,6 +52,7 @@ void ffParseVersionJsonObject(FFVersionOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateVersionJsonConfig(FFVersionOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -98,15 +99,24 @@ FFModuleBaseInfo ffVersionModuleInfo = {
     .description = "Print the Fastfetch version and build information",
     .displayName = {
         .en = "Version",
+        .ar = "الإصدار",
+        .cs = "Verze",
         .de = "Version",
         .es = "Versión",
+        .fi = "Versio",
         .fr = "Version",
+        .gl = "Versión",
+        .he = "גרסה",
+        .id = "Versi",
         .it = "Versione",
         .ja = "バージョン",
         .ko = "버전",
         .pl = "Wersja",
-        .pt_BR = "Versão",
+        .pt = "Versão",
         .ru = "Версия",
+        .tr = "Sürüm",
+        .uk = "Версія",
+        .vi = "Phiên bản",
         .zh_CN = "版本",
         .zh_TW = "版本",
     },
@@ -128,5 +138,5 @@ FFModuleBaseInfo ffVersionModuleInfo = {
         { "Compiler used when compiling", "compiler" },
         { "Libc used when compiling", "libc" },
     })),
-    .defaultOrder = 70,
+    .defaultOrder = 71,
 };

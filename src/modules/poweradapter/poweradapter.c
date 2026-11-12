@@ -51,6 +51,7 @@ bool ffPrintPowerAdapter(FFPowerAdapterOptions* options) {
     return true;
 }
 
+[[gnu::cold]]
 void ffGeneratePowerAdapterJsonConfig(FFPowerAdapterOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -112,15 +113,24 @@ FFModuleBaseInfo ffPowerAdapterModuleInfo = {
     .description = "Print power adapter name and charging watts",
     .displayName = {
         .en = "Power Adapter",
+        .ar = "محول الطاقة",
+        .cs = "Napájecí adaptér",
         .de = "Netzteil",
         .es = "Adaptador de corriente",
+        .fi = "Virta-adapteri",
         .fr = "Adaptateur secteur",
+        .gl = "Adaptador de corrente",
+        .he = "מתאם מתח",
+        .id = "Adaptor Daya",
         .it = "Alimentatore",
         .ja = "電源アダプター",
         .ko = "전원 어댑터",
         .pl = "Zasilacz",
-        .pt_BR = "Fonte de alimentação",
-        .ru = "Блок питания",
+        .pt = "Fonte de alimentação",
+        .ru = "Адаптер питания",
+        .tr = "Güç Adaptörü",
+        .uk = "Блок живлення",
+        .vi = "Bộ chuyển đổi nguồn",
         .zh_CN = "电源适配器",
         .zh_TW = "電源轉接器",
     },
@@ -134,9 +144,9 @@ FFModuleBaseInfo ffPowerAdapterModuleInfo = {
         { "Power adapter watts", "watts" },
         { "Power adapter name", "name" },
         { "Power adapter manufacturer", "manufacturer" },
-        { "Power adapter model", "model" },
+        { "Power adapter model name", "model-name" },
         { "Power adapter description", "description" },
         { "Power adapter serial number", "serial" },
     })),
-    .defaultOrder = 45,
+    .defaultOrder = 46,
 };

@@ -62,6 +62,7 @@ void ffParseChassisJsonObject(FFChassisOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateChassisJsonConfig(FFChassisOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -114,15 +115,24 @@ FFModuleBaseInfo ffChassisModuleInfo = {
     .description = "Print chassis type information (desktop, laptop, etc.)",
     .displayName = {
         .en = "Chassis",
+        .ar = "الهيكل",
+        .cs = "Skříň",
         .de = "Gehäuse",
         .es = "Chasis",
+        .fi = "Alusta",
         .fr = "Châssis",
+        .gl = "Chasis",
+        .he = "מארז",
+        .id = "Casing",
         .it = "Telaio",
         .ja = "シャーシ",
         .ko = "섀시",
         .pl = "Obudowa",
-        .pt_BR = "Chassi",
-        .ru = "Шасси",
+        .pt = "Chassi",
+        .ru = "Корпус",
+        .tr = "Kasa",
+        .uk = "Корпус",
+        .vi = "Vỏ máy",
         .zh_CN = "机箱",
         .zh_TW = "機箱",
     },

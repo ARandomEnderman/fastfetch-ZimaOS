@@ -48,6 +48,7 @@ void ffParseTerminalJsonObject(FFTerminalOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateTerminalJsonConfig(FFTerminalOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -87,15 +88,24 @@ FFModuleBaseInfo ffTerminalModuleInfo = {
     .description = "Print the current terminal name and version",
     .displayName = {
         .en = "Terminal",
+        .ar = "الطرفية",
+        .cs = "Terminál",
         .de = "Terminal",
         .es = "Terminal",
+        .fi = "Terminaali",
         .fr = "Terminal",
+        .gl = "Terminal",
+        .he = "טרמינל",
+        .id = "Terminal",
         .it = "Terminale",
         .ja = "ターミナル",
         .ko = "터미널",
         .pl = "Terminal",
-        .pt_BR = "Terminal",
+        .pt = "Terminal",
         .ru = "Терминал",
+        .tr = "Terminal",
+        .uk = "Термінал",
+        .vi = "Terminal",
         .zh_CN = "终端",
         .zh_TW = "終端機",
     },

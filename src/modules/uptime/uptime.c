@@ -54,12 +54,13 @@ void ffParseUptimeJsonObject(FFUptimeOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateUptimeJsonConfig(FFUptimeOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
 
 bool ffGenerateUptimeJsonResult([[maybe_unused]] FFUptimeOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
-    FFUptimeResult result;
+    FFUptimeResult result = {};
     const char* error = ffDetectUptime(&result);
 
     if (error) {
@@ -87,15 +88,24 @@ FFModuleBaseInfo ffUptimeModuleInfo = {
     .description = "Print how long the system has been running",
     .displayName = {
         .en = "Uptime",
+        .ar = "مدة التشغيل",
+        .cs = "Doba běhu",
         .de = "Betriebszeit",
         .es = "Tiempo de actividad",
+        .fi = "Käynnissäoloaika",
         .fr = "Temps de fonctionnement",
+        .gl = "Tempo de actividade",
+        .he = "זמן פעילות",
+        .id = "Waktu Aktif",
         .it = "Tempo di attività",
         .ja = "稼働時間",
         .ko = "업타임",
         .pl = "Czas pracy",
-        .pt_BR = "Tempo de atividade",
+        .pt = "Tempo de atividade",
         .ru = "Время работы",
+        .tr = "Çalışma Süresi",
+        .uk = "Час роботи",
+        .vi = "Thời gian hoạt động",
         .zh_CN = "运行时间",
         .zh_TW = "運行時間",
     },

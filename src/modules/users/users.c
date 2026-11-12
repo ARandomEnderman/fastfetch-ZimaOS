@@ -125,6 +125,7 @@ void ffParseUsersJsonObject(FFUsersOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateUsersJsonConfig(FFUsersOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -184,15 +185,24 @@ FFModuleBaseInfo ffUsersModuleInfo = {
     .description = "Print users who are currently logged in",
     .displayName = {
         .en = "Users",
+        .ar = "المستخدمون",
+        .cs = "Uživatelé",
         .de = "Benutzer",
         .es = "Usuarios",
+        .fi = "Käyttäjät",
         .fr = "Utilisateurs",
+        .gl = "Usuarios",
+        .he = "משתמשים",
+        .id = "Pengguna",
         .it = "Utenti",
         .ja = "ユーザー",
         .ko = "사용자",
         .pl = "Użytkownicy",
-        .pt_BR = "Usuários",
+        .pt = "Usuários",
         .ru = "Пользователи",
+        .tr = "Kullanıcılar",
+        .uk = "Користувачі",
+        .vi = "Người dùng",
         .zh_CN = "用户",
         .zh_TW = "使用者",
     },
@@ -217,5 +227,5 @@ FFModuleBaseInfo ffUsersModuleInfo = {
         { "Days of year after login", "days-of-year" },
         { "Years fraction after login", "years-fraction" },
     })),
-    .defaultOrder = 57,
+    .defaultOrder = 58,
 };

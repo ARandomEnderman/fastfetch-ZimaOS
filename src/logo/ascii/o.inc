@@ -37,6 +37,31 @@ static const FFlogo O[] = {
         },
     },
     #endif
+    #ifdef FASTFETCH_DATATEXT_LOGO_OMARCHY
+    // Omarchy
+    {
+        .names = { "Omarchy" },
+        .lines = FASTFETCH_DATATEXT_LOGO_OMARCHY,
+        .colors = {
+            FF_COLOR_FG_256 "149",
+        },
+        .colorKeys = FF_COLOR_FG_256 "149",
+        .colorTitle = FF_COLOR_FG_256 "111",
+    },
+    #endif
+    #ifdef FASTFETCH_DATATEXT_LOGO_OMARCHY2
+    // Omarchy2
+    {
+        .names = { "Omarchy2" },
+        .lines = FASTFETCH_DATATEXT_LOGO_OMARCHY2,
+        .type = FF_LOGO_LINE_TYPE_ALTER_BIT,
+        .colors = {
+            FF_COLOR_FG_256 "149",
+        },
+        .colorKeys = FF_COLOR_FG_256 "149",
+        .colorTitle = FF_COLOR_FG_256 "111",
+    },
+    #endif
     #ifdef FASTFETCH_DATATEXT_LOGO_OMNIOS
     // OmniOS
     {
@@ -193,6 +218,18 @@ static const FFlogo O[] = {
         .lines = FASTFETCH_DATATEXT_LOGO_OPENSUSE_LEAP,
         .colors = {
             FF_COLOR_FG_DEFAULT,
+        },
+        .colorKeys = FF_COLOR_FG_GREEN,
+        .colorTitle = FF_COLOR_FG_GREEN,
+    },
+    #endif
+    #ifdef FASTFETCH_DATATEXT_LOGO_OPENSUSE_LEAP_MICRO
+    // OpenSuseLeapMicro
+    {
+        .names = { "opensuse-leap-micro" },
+        .lines = FASTFETCH_DATATEXT_LOGO_OPENSUSE_LEAP_MICRO,
+        .colors = {
+            FF_COLOR_FG_GREEN,
         },
         .colorKeys = FF_COLOR_FG_GREEN,
         .colorTitle = FF_COLOR_FG_GREEN,

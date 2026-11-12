@@ -69,6 +69,7 @@ void ffParseOpenGLJsonObject(FFOpenGLOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateOpenGLJsonConfig(FFOpenGLOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -131,15 +132,24 @@ FFModuleBaseInfo ffOpenGLModuleInfo = {
     .description = "Print the highest OpenGL version supported by the GPU",
     .displayName = {
         .en = "OpenGL",
+        .ar = "OpenGL",
+        .cs = "OpenGL",
         .de = "OpenGL",
         .es = "OpenGL",
+        .fi = "OpenGL",
         .fr = "OpenGL",
+        .gl = "OpenGL",
+        .he = "OpenGL",
+        .id = "OpenGL",
         .it = "OpenGL",
         .ja = "OpenGL",
         .ko = "OpenGL",
         .pl = "OpenGL",
-        .pt_BR = "OpenGL",
+        .pt = "OpenGL",
         .ru = "OpenGL",
+        .tr = "OpenGL",
+        .uk = "OpenGL",
+        .vi = "OpenGL",
         .zh_CN = "OpenGL",
         .zh_TW = "OpenGL",
     },
@@ -156,5 +166,5 @@ FFModuleBaseInfo ffOpenGLModuleInfo = {
         { "OpenGL shading language version", "slv" },
         { "OpenGL library used", "library" },
     })),
-    .defaultOrder = 55,
+    .defaultOrder = 56,
 };

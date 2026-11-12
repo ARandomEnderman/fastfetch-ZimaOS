@@ -52,6 +52,7 @@ void ffParseThemeJsonObject(FFThemeOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateThemeJsonConfig(FFThemeOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -91,15 +92,24 @@ FFModuleBaseInfo ffThemeModuleInfo = {
     .description = "Print the current desktop environment theme",
     .displayName = {
         .en = "Theme",
+        .ar = "السمة",
+        .cs = "Motiv",
         .de = "Thema",
         .es = "Tema",
+        .fi = "Teema",
         .fr = "Thème",
+        .gl = "Tema",
+        .he = "ערכת נושא",
+        .id = "Tema",
         .it = "Tema",
         .ja = "テーマ",
         .ko = "테마",
         .pl = "Motyw",
-        .pt_BR = "Tema",
+        .pt = "Tema",
         .ru = "Тема",
+        .tr = "Tema",
+        .uk = "Тема",
+        .vi = "Chủ đề",
         .zh_CN = "主题",
         .zh_TW = "主題",
     },

@@ -21,6 +21,7 @@ static void printCPUCacheNormal(const FFCPUCacheResult* result, FFCPUCacheOption
                                                                                FF_ARG(index, "index"),
                                                                                FF_ARG(levelStr, "level"),
                                                                                FF_ARG(options->moduleArgs.keyIcon, "icon"),
+                                                                               FF_ARG(FF_MODULE_GET_DISPLAY_NAME(CPUCache), "module-name"),
                                                                            }));
         }
 
@@ -64,6 +65,7 @@ static void printCPUCacheNormal(const FFCPUCacheResult* result, FFCPUCacheOption
             FF_PRINT_FORMAT_CHECKED(key.chars, 0, &options->moduleArgs, FF_PRINT_TYPE_NO_CUSTOM_KEY, ((FFformatarg[]) {
                                                                                                          FF_ARG(buffer, "result"),
                                                                                                          FF_ARG(buffer2, "sum"),
+                                                                                                         FF_ARG(levelStr, "level"),
                                                                                                      }));
         }
     }
@@ -149,6 +151,7 @@ void ffParseCPUCacheJsonObject(FFCPUCacheOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateCPUCacheJsonConfig(FFCPUCacheOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -225,15 +228,24 @@ FFModuleBaseInfo ffCPUCacheModuleInfo = {
     .description = "Print CPU cache sizes",
     .displayName = {
         .en = "CPU Cache",
+        .ar = "ذاكرة المعالج المؤقتة",
+        .cs = "Mezipaměť CPU",
         .de = "CPU-Cache",
-        .es = "Caché de CPU",
+        .es = "Caché de la CPU",
+        .fi = "Suorittimen Välimuisti",
         .fr = "Cache CPU",
+        .gl = "Caché da CPU",
+        .he = "מטמון מעבד",
+        .id = "Cache CPU",
         .it = "Cache CPU",
         .ja = "CPUキャッシュ",
         .ko = "CPU 캐시",
         .pl = "Pamięć podręczna CPU",
-        .pt_BR = "Cache da CPU",
+        .pt = "Cache da CPU",
         .ru = "Кэш процессора",
+        .tr = "CPU Önbelleği",
+        .uk = "Кеш ЦП",
+        .vi = "Bộ nhớ đệm CPU",
         .zh_CN = "CPU缓存",
         .zh_TW = "CPU快取記憶體",
     },
@@ -246,6 +258,7 @@ FFModuleBaseInfo ffCPUCacheModuleInfo = {
     .formatArgs = FF_FORMAT_ARG_LIST(((FFModuleFormatArg[]) {
         { "Separate result", "result" },
         { "Sum result", "sum" },
+        { "Cache level *", "level" },
     })),
     .defaultOrder = 34,
 };

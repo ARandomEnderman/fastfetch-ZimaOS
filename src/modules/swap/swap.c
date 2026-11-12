@@ -21,6 +21,7 @@ void printSwap(FFSwapOptions* options, uint8_t index, uint32_t totalCount, FFSwa
                                                                            FF_ARG(index, "index"),
                                                                            FF_ARG(storage->name, "name"),
                                                                            FF_ARG(options->moduleArgs.keyIcon, "icon"),
+                                                                           FF_ARG(FF_MODULE_GET_DISPLAY_NAME(Swap), "module-name"),
                                                                        }));
     }
 
@@ -140,6 +141,7 @@ void ffParseSwapJsonObject(FFSwapOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateSwapJsonConfig(FFSwapOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffPercentGenerateJsonConfig(doc, module, options->percent);
 
@@ -186,15 +188,24 @@ FFModuleBaseInfo ffSwapModuleInfo = {
     .description = "Print swap (paging file) space usage",
     .displayName = {
         .en = "Swap",
+        .ar = "الذاكرة التبادلية",
+        .cs = "Odkládací prostor",
         .de = "Swap",
         .es = "Swap",
+        .fi = "Swap",
         .fr = "Swap",
+        .gl = "Swap",
+        .he = "זיכרון החלפה",
+        .id = "Swap",
         .it = "Swap",
         .ja = "スワップ",
         .ko = "스왑",
         .pl = "Swap",
-        .pt_BR = "Swap",
-        .ru = "Своп",
+        .pt = "Swap",
+        .ru = "Подкачка",
+        .tr = "Takas",
+        .uk = "Своп",
+        .vi = "Swap",
         .zh_CN = "交换空间",
         .zh_TW = "交換空間",
     },
@@ -209,7 +220,7 @@ FFModuleBaseInfo ffSwapModuleInfo = {
         { "Total size", "total" },
         { "Percentage used (num)", "percentage" },
         { "Percentage used (bar)", "percentage-bar" },
-        { "Name", "name" },
+        { "Name *", "name" },
     })),
-    .defaultOrder = 40,
+    .defaultOrder = 41,
 };

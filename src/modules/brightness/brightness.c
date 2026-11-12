@@ -51,6 +51,7 @@ bool ffPrintBrightness(FFBrightnessOptions* options) {
                                                                                FF_ARG(moduleIndex, "index"),
                                                                                FF_ARG(item->name, "name"),
                                                                                FF_ARG(options->moduleArgs.keyIcon, "icon"),
+                                                                               FF_ARG(FF_MODULE_GET_DISPLAY_NAME(Brightness), "module-name"),
                                                                            }));
         }
 
@@ -134,6 +135,7 @@ void ffParseBrightnessJsonObject(FFBrightnessOptions* options, yyjson_val* modul
     }
 }
 
+[[gnu::cold]]
 void ffGenerateBrightnessJsonConfig(FFBrightnessOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -194,15 +196,24 @@ FFModuleBaseInfo ffBrightnessModuleInfo = {
     .description = "Print the current brightness level of your monitors",
     .displayName = {
         .en = "Brightness",
+        .ar = "السطوع",
+        .cs = "Jas",
         .de = "Helligkeit",
         .es = "Brillo",
+        .fi = "Kirkkaus",
         .fr = "Luminosité",
+        .gl = "Brillo",
+        .he = "בהירות",
+        .id = "Kecerahan",
         .it = "Luminosità",
         .ja = "明るさ",
         .ko = "밝기",
         .pl = "Jasność",
-        .pt_BR = "Brilho",
+        .pt = "Brilho",
         .ru = "Яркость",
+        .tr = "Parlaklık",
+        .uk = "Яскравість",
+        .vi = "Độ sáng",
         .zh_CN = "亮度",
         .zh_TW = "亮度",
     },
@@ -214,7 +225,7 @@ FFModuleBaseInfo ffBrightnessModuleInfo = {
     .generateJsonConfig = (void*) ffGenerateBrightnessJsonConfig,
     .formatArgs = FF_FORMAT_ARG_LIST(((FFModuleFormatArg[]) {
         { "Screen brightness (percentage num)", "percentage" },
-        { "Screen name", "name" },
+        { "Screen name *", "name" },
         { "Maximum brightness value", "max" },
         { "Minimum brightness value", "min" },
         { "Current brightness value", "current" },

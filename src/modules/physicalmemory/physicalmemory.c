@@ -105,6 +105,7 @@ void ffParsePhysicalMemoryJsonObject(FFPhysicalMemoryOptions* options, yyjson_va
     }
 }
 
+[[gnu::cold]]
 void ffGeneratePhysicalMemoryJsonConfig(FFPhysicalMemoryOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
     yyjson_mut_obj_add_bool(doc, module, "showEmptySlots", options->showEmptySlots);
@@ -161,15 +162,24 @@ FFModuleBaseInfo ffPhysicalMemoryModuleInfo = {
     .description = "Print system physical memory devices",
     .displayName = {
         .en = "Physical Memory",
+        .ar = "الذاكرة الفعلية",
+        .cs = "Fyzická paměť",
         .de = "Physischer Speicher",
         .es = "Memoria física",
+        .fi = "Fyysinen Muisti",
         .fr = "Mémoire physique",
+        .gl = "Memoria física",
+        .he = "זיכרון פיזי",
+        .id = "Memori Fisik",
         .it = "Memoria fisica",
         .ja = "物理メモリ",
         .ko = "물리 메모리",
         .pl = "Pamięć fizyczna",
-        .pt_BR = "Memória física",
+        .pt = "Memória física",
         .ru = "Физическая память",
+        .tr = "Fiziksel Bellek",
+        .uk = "Фізична пам'ять",
+        .vi = "Bộ nhớ vật lý",
         .zh_CN = "物理内存",
         .zh_TW = "實體記憶體",
     },
@@ -193,5 +203,5 @@ FFModuleBaseInfo ffPhysicalMemoryModuleInfo = {
         { "True if ECC enabled", "is-ecc-enabled" },
         { "True if a memory module is installed in the slot", "is-installed" },
     })),
-    .defaultOrder = 39,
+    .defaultOrder = 40,
 };

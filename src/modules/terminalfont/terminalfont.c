@@ -52,6 +52,7 @@ void ffParseTerminalFontJsonObject(FFTerminalFontOptions* options, yyjson_val* m
     }
 }
 
+[[gnu::cold]]
 void ffGenerateTerminalFontJsonConfig(FFTerminalFontOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -107,15 +108,24 @@ FFModuleBaseInfo ffTerminalFontModuleInfo = {
     .description = "Print the font name and size used by the current terminal",
     .displayName = {
         .en = "Terminal Font",
+        .ar = "خط الطرفية",
+        .cs = "Písmo terminálu",
         .de = "Terminalschriftart",
         .es = "Fuente del terminal",
+        .fi = "Terminaalin Fontti",
         .fr = "Police du terminal",
+        .gl = "Fonte do terminal",
+        .he = "גופן טרמינל",
+        .id = "Font Terminal",
         .it = "Carattere del terminale",
         .ja = "ターミナルフォント",
         .ko = "터미널 글꼴",
         .pl = "Czcionka terminala",
-        .pt_BR = "Fonte do terminal",
+        .pt = "Fonte do terminal",
         .ru = "Шрифт терминала",
+        .tr = "Terminal Yazı Tipi",
+        .uk = "Шрифт терміналу",
+        .vi = "Phông chữ Terminal",
         .zh_CN = "终端字体",
         .zh_TW = "終端機字型",
     },

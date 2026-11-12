@@ -19,6 +19,7 @@ static void formatKey(const FFPhysicalDiskOptions* options, FFPhysicalDiskResult
                                                                           FF_ARG(dev->name, "name"),
                                                                           FF_ARG(dev->devPath, "dev-path"),
                                                                           FF_ARG(options->moduleArgs.keyIcon, "icon"),
+                                                                          FF_ARG(FF_MODULE_GET_DISPLAY_NAME(PhysicalDisk), "module-name"),
                                                                       }));
     }
 }
@@ -170,6 +171,7 @@ void ffParsePhysicalDiskJsonObject(FFPhysicalDiskOptions* options, yyjson_val* m
     }
 }
 
+[[gnu::cold]]
 void ffGeneratePhysicalDiskJsonConfig(FFPhysicalDiskOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -267,15 +269,24 @@ FFModuleBaseInfo ffPhysicalDiskModuleInfo = {
     .description = "Print physical disk information",
     .displayName = {
         .en = "Physical Disk",
+        .ar = "القرص الفعلي",
+        .cs = "Fyzický disk",
         .de = "Physische Festplatte",
         .es = "Disco físico",
+        .fi = "Fyysinen Levy",
         .fr = "Disque physique",
+        .gl = "Disco físico",
+        .he = "דיסק פיזי",
+        .id = "Disk Fisik",
         .it = "Disco fisico",
         .ja = "物理ディスク",
         .ko = "물리 디스크",
         .pl = "Dysk fizyczny",
-        .pt_BR = "Disco físico",
+        .pt = "Disco físico",
         .ru = "Физический диск",
+        .tr = "Fiziksel Disk",
+        .uk = "Фізичний диск",
+        .vi = "Ổ đĩa vật lý",
         .zh_CN = "物理磁盘",
         .zh_TW = "物理磁碟",
     },
@@ -287,9 +298,9 @@ FFModuleBaseInfo ffPhysicalDiskModuleInfo = {
     .generateJsonConfig = (void*) ffGeneratePhysicalDiskJsonConfig,
     .formatArgs = FF_FORMAT_ARG_LIST(((FFModuleFormatArg[]) {
         { "Device size (formatted)", "size" },
-        { "Device name", "name" },
+        { "Device name *", "name" },
         { "Device interconnect type", "interconnect" },
-        { "Device raw file path", "dev-path" },
+        { "Device raw file path *", "dev-path" },
         { "Serial number", "serial" },
         { "Device kind (SSD or HDD)", "physical-type" },
         { "Device kind (Removable or Fixed)", "removable-type" },
@@ -297,5 +308,5 @@ FFModuleBaseInfo ffPhysicalDiskModuleInfo = {
         { "Product revision", "revision" },
         { "Device temperature (formatted)", "temperature" },
     })),
-    .defaultOrder = 68,
+    .defaultOrder = 69,
 };

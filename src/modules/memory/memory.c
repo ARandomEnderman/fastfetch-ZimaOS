@@ -86,6 +86,7 @@ void ffParseMemoryJsonObject(FFMemoryOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateMemoryJsonConfig(FFMemoryOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -122,15 +123,24 @@ FFModuleBaseInfo ffMemoryModuleInfo = {
     .description = "Print system memory usage information",
     .displayName = {
         .en = "Memory",
+        .ar = "الذاكرة",
+        .cs = "Paměť",
         .de = "Speicher",
         .es = "Memoria",
+        .fi = "Keskusmuisti",
         .fr = "Mémoire",
+        .gl = "Memoria",
+        .he = "זיכרון",
+        .id = "Memori",
         .it = "Memoria",
         .ja = "メモリ",
         .ko = "메모리",
         .pl = "Pamięć",
-        .pt_BR = "Memória",
+        .pt = "Memória",
         .ru = "Память",
+        .tr = "Bellek",
+        .uk = "Пам'ять",
+        .vi = "Bộ nhớ",
         .zh_CN = "内存",
         .zh_TW = "記憶體",
     },
@@ -146,5 +156,5 @@ FFModuleBaseInfo ffMemoryModuleInfo = {
         { "Percentage used (num)", "percentage" },
         { "Percentage used (bar)", "percentage-bar" },
     })),
-    .defaultOrder = 38,
+    .defaultOrder = 39,
 };

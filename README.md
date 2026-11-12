@@ -1,5 +1,6 @@
 # Fastfetch
 
+[![Benchmark](https://img.shields.io/badge/GitHub%20Pages-live-blue?logo=github)](https://fastfetch-cli.github.io/fastfetch/dev/bench)
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/fastfetch-cli/fastfetch/ci.yml)](https://github.com/fastfetch-cli/fastfetch/actions)
 [![GitHub license](https://img.shields.io/github/license/fastfetch-cli/fastfetch)](https://github.com/fastfetch-cli/fastfetch/blob/dev/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/fastfetch-cli/fastfetch)](https://github.com/fastfetch-cli/fastfetch/graphs/contributors)
@@ -99,7 +100,7 @@ See the Wiki: https://github.com/fastfetch-cli/fastfetch/wiki/Building
 * View all data that fastfetch detects: `fastfetch -s <module1>[:<module2>][:<module3>] --format json`
 * Display help messages: `fastfetch --help`
 * Generate a minimal config file: `fastfetch [-s <module1>[:<module2>]] --gen-config [</path/to/config.jsonc>]`
-    * Use: `--gen-config-full` to generate a full config file with all optional options
+    * Use [The online configuration generator](https://fastfetch-cli.github.io/fastfetch-config/) to generate a full config file with all optional options
 
 ## Customization
 
@@ -212,10 +213,6 @@ Alternatively, you may try using `fastfetch --gpu-driver-specific`, which will m
 
 Try `export XAUTHORITY=$HOME/.Xauthority`
 
-### Q: Fastfetch cannot detect my awesome 3rd-party macOS window manager!
-
-Try `fastfetch --wm-detect-plugin`. See also [#984](https://github.com/fastfetch-cli/fastfetch/issues/984)
-
 ### Q: How can I change the colors of my ASCII logo?
 
 Try `fastfetch --logo-color-[1-9] <color>`, where `[1-9]` is the index of color placeholders.
@@ -247,7 +244,20 @@ Set the key to a white space.
 
 ### Q: How can I display images on Windows?
 
-As of April 2025:
+#### Windows Terminal
+
+Windows Terminal supports the sixel image protocol only.
+
+```jsonc
+{
+  "logo": {
+    "type": "sixel", // DO NOT USE "auto"
+    "source": "C:/path/to/image.png", // ~ can be used to refer to the Windows user home directory
+    "width": <image-width-in-chars>, // Optional
+    "height": <image-height-in-chars> // Optional
+  }
+}
+```
 
 #### mintty and Wezterm
 
@@ -259,38 +269,7 @@ In `config.jsonc`:
   "logo": {
     "type": "iterm",
     "source": "C:/path/to/image.png",
-    "width": <num-in-chars>
-  }
-}
-```
-
-#### Windows Terminal
-
-Windows Terminal supports the sixel image protocol only.
-
-* If you installed fastfetch through MSYS2:
-    1. Install imagemagick: `pacman -S mingw-w64-<subsystem>-x86_64-imagemagick`
-    2. In `config.jsonc`:  
-```jsonc
-{
-  "logo": {
-    "type": "sixel", // DO NOT USE "auto"
-    "source": "C:/path/to/image.png", // Do NOT use `~` as fastfetch is a native Windows program and doesn't apply cygwin path conversion
-    "width": <image-width-in-chars>, // Optional
-    "height": <image-height-in-chars> // Optional
-  }
-}
-```
-* If you installed fastfetch via scoop or downloaded the binary directly from the GitHub Releases page:
-    1. Convert your image manually to sixel format using [any online image conversion service](https://www.google.com/search?q=convert+image+to+sixel)
-    2. In `config.jsonc`:  
-```jsonc
-{
-  "logo": {
-    "type": "raw", // DO NOT USE "auto"
-    "source": "C:/path/to/image.sixel",
-    "width": <image-width-in-chars>, // Required
-    "height": <image-height-in-chars> // Required
+    "width": <image-width-in-chars>
   }
 }
 ```

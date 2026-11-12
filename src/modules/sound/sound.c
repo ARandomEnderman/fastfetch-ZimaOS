@@ -67,7 +67,6 @@ static void printDevice(FFSoundOptions* options, const FFSoundDevice* device, ui
 }
 
 bool ffPrintSound(FFSoundOptions* options) {
-    bool success = false;
     FF_LIST_AUTO_DESTROY result = ffListCreate();
 
     const char* error = ffDetectSound(options, &result);
@@ -93,7 +92,7 @@ bool ffPrintSound(FFSoundOptions* options) {
         ffStrbufDestroy(&device->platformApi);
     }
 
-    return success;
+    return true;
 }
 
 void ffParseSoundJsonObject(FFSoundOptions* options, yyjson_val* module) {
@@ -128,6 +127,7 @@ void ffParseSoundJsonObject(FFSoundOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateSoundJsonConfig(FFSoundOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -203,15 +203,24 @@ FFModuleBaseInfo ffSoundModuleInfo = {
     .description = "Print sound devices, volume levels, etc",
     .displayName = {
         .en = "Sound",
+        .ar = "الصوت",
+        .cs = "Zvuk",
         .de = "Sound",
         .es = "Sonido",
+        .fi = "Ääni",
         .fr = "Son",
+        .gl = "Son",
+        .he = "קול",
+        .id = "Suara",
         .it = "Audio",
         .ja = "サウンド",
         .ko = "사운드",
         .pl = "Dźwięk",
-        .pt_BR = "Som",
+        .pt = "Som",
         .ru = "Звук",
+        .tr = "Ses",
+        .uk = "Звук",
+        .vi = "Âm thanh",
         .zh_CN = "声音",
         .zh_TW = "聲音",
     },
@@ -230,5 +239,5 @@ FFModuleBaseInfo ffSoundModuleInfo = {
         { "Volume (in percentage bar)", "volume-percentage-bar" },
         { "Platform API used", "platform-api" },
     })),
-    .defaultOrder = 60,
+    .defaultOrder = 61,
 };

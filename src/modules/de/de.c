@@ -51,6 +51,7 @@ void ffParseDEJsonObject(FFDEOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateDEJsonConfig(FFDEOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -86,15 +87,24 @@ FFModuleBaseInfo ffDEModuleInfo = {
     .description = "Print desktop environment name",
     .displayName = {
         .en = "Desktop Environment",
+        .ar = "بيئة سطح المكتب",
+        .cs = "Pracovní prostředí",
         .de = "Desktop-Umgebung",
-        .es = "Entorno de Escritorio",
+        .es = "Entorno de escritorio",
+        .fi = "Työpöytäympäristö",
         .fr = "Environnement de Bureau",
+        .gl = "Contorno do Escritorio",
+        .he = "סביבת שולחן עבודה",
+        .id = "Lingkungan Desktop",
         .it = "Ambiente Desktop",
         .ja = "デスクトップ環境",
         .ko = "데스크탑 환경",
         .pl = "Środowisko graficzne",
-        .pt_BR = "Ambiente de desktop",
-        .ru = "Рабочая среда",
+        .pt = "Ambiente de desktop",
+        .ru = "Рабочее окружение",
+        .tr = "Masaüstü Ortamı",
+        .uk = "Стільниче середовище",
+        .vi = "Môi trường desktop",
         .zh_CN = "桌面环境",
         .zh_TW = "桌面環境",
     },

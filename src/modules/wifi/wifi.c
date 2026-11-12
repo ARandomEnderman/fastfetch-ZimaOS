@@ -108,6 +108,7 @@ bool ffPrintWifi(FFWifiOptions* options) {
                                                                                                                        FF_ARG(item->conn.security, "security"),
                                                                                                                        FF_ARG(percentBar, "signal-quality-bar"),
                                                                                                                        FF_ARG(item->conn.channel, "channel"),
+                                                                                                                       FF_ARG(item->conn.channelWidth, "channel-width"),
                                                                                                                        FF_ARG(bandStr, "band"),
                                                                                                                    }));
         }
@@ -142,6 +143,7 @@ void ffParseWifiJsonObject(FFWifiOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateWifiJsonConfig(FFWifiOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -186,6 +188,7 @@ bool ffGenerateWifiJsonResult([[maybe_unused]] FFWifiOptions* options, yyjson_mu
             yyjson_mut_obj_add_null(doc, conn, "txRate");
         }
         yyjson_mut_obj_add_uint(doc, conn, "channel", wifi->conn.channel);
+        yyjson_mut_obj_add_uint(doc, conn, "channelWidth", wifi->conn.channelWidth);
         yyjson_mut_obj_add_uint(doc, conn, "frequency", wifi->conn.frequency);
     }
 
@@ -217,15 +220,24 @@ FFModuleBaseInfo ffWifiModuleInfo = {
     .description = "Print connected Wi-Fi info (SSID, connection and security protocol)",
     .displayName = {
         .en = "Wi-Fi",
+        .ar = "واي فاي",
+        .cs = "Wi-Fi",
         .de = "WLAN",
         .es = "Wi-Fi",
+        .fi = "Wi-Fi",
         .fr = "Wi-Fi",
+        .gl = "Wi-Fi",
+        .he = "Wi-Fi",
+        .id = "Wi-Fi",
         .it = "Wi-Fi",
         .ja = "Wi-Fi",
         .ko = "와이파이",
         .pl = "Wi-Fi",
-        .pt_BR = "Wi-Fi",
+        .pt = "Wi-Fi",
         .ru = "Wi-Fi",
+        .tr = "Wi-Fi",
+        .uk = "Wi-Fi",
+        .vi = "Wi-Fi",
         .zh_CN = "无线网络",
         .zh_TW = "無線網路",
     },
@@ -248,7 +260,8 @@ FFModuleBaseInfo ffWifiModuleInfo = {
         { "Connection Security algorithm", "security" },
         { "Connection signal quality (percentage bar)", "signal-quality-bar" },
         { "Connection channel number", "channel" },
+        { "Connection channel width in MHz", "channel-width" },
         { "Connection channel band in GHz", "band" },
     })),
-    .defaultOrder = 51,
+    .defaultOrder = 52,
 };

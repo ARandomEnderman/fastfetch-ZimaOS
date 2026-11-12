@@ -39,6 +39,7 @@ void ffParseOpenCLJsonObject(FFOpenCLOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateOpenCLJsonConfig(FFOpenCLOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -84,7 +85,7 @@ bool ffGenerateOpenCLJsonResult([[maybe_unused]] FFOpenCLOptions* options, yyjso
             }
 
             if (gpu->dedicated.used != FF_GPU_VMEM_SIZE_UNSET) {
-                yyjson_mut_obj_add_uint(doc, dedicatedMemory, "used", gpu->dedicated.total);
+                yyjson_mut_obj_add_uint(doc, dedicatedMemory, "used", gpu->dedicated.used);
             } else {
                 yyjson_mut_obj_add_null(doc, dedicatedMemory, "used");
             }
@@ -124,15 +125,24 @@ FFModuleBaseInfo ffOpenCLModuleInfo = {
     .description = "Print the highest OpenCL version supported by the GPU",
     .displayName = {
         .en = "OpenCL",
+        .ar = "OpenCL",
+        .cs = "OpenCL",
         .de = "OpenCL",
         .es = "OpenCL",
+        .fi = "OpenCL",
         .fr = "OpenCL",
+        .gl = "OpenCL",
+        .he = "OpenCL",
+        .id = "OpenCL",
         .it = "OpenCL",
         .ja = "OpenCL",
         .ko = "OpenCL",
         .pl = "OpenCL",
-        .pt_BR = "OpenCL",
+        .pt = "OpenCL",
         .ru = "OpenCL",
+        .tr = "OpenCL",
+        .uk = "OpenCL",
+        .vi = "OpenCL",
         .zh_CN = "OpenCL",
         .zh_TW = "OpenCL",
     },
@@ -147,5 +157,5 @@ FFModuleBaseInfo ffOpenCLModuleInfo = {
         { "Platform name", "name" },
         { "Platform vendor", "vendor" },
     })),
-    .defaultOrder = 56,
+    .defaultOrder = 57,
 };

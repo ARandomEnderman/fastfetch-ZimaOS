@@ -91,6 +91,7 @@ void ffParseMouseJsonObject(FFMouseOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateMouseJsonConfig(FFMouseOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 
@@ -156,15 +157,24 @@ FFModuleBaseInfo ffMouseModuleInfo = {
     .description = "List connected mice",
     .displayName = {
         .en = "Mouse",
+        .ar = "الفأرة",
+        .cs = "Myš",
         .de = "Maus",
         .es = "Ratón",
+        .fi = "Hiiri",
         .fr = "Souris",
+        .gl = "Rato",
+        .he = "עכבר",
+        .id = "Tetikus",
         .it = "Mouse",
         .ja = "マウス",
         .ko = "마우스",
         .pl = "Mysz",
-        .pt_BR = "Mouse",
+        .pt = "Mouse",
         .ru = "Мышь",
+        .tr = "Fare",
+        .uk = "Миша",
+        .vi = "Chuột",
         .zh_CN = "鼠标",
         .zh_TW = "滑鼠",
     },
@@ -178,5 +188,5 @@ FFModuleBaseInfo ffMouseModuleInfo = {
         { "Mouse name", "name" },
         { "Mouse serial number", "serial" },
     })),
-    .defaultOrder = 63,
+    .defaultOrder = 64,
 };

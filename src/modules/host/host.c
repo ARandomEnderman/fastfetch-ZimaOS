@@ -79,6 +79,7 @@ void ffParseHostJsonObject(FFHostOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateHostJsonConfig(FFHostOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -140,15 +141,24 @@ FFModuleBaseInfo ffHostModuleInfo = {
     .description = "Print your computer's product name",
     .displayName = {
         .en = "Host",
+        .ar = "المضيف",
+        .cs = "Hostitel",
         .de = "Rechner",
         .es = "Host",
+        .fi = "Isäntä",
         .fr = "Hôte",
+        .gl = "Host",
+        .he = "מארח",
+        .id = "Host",
         .it = "Host",
         .ja = "ホスト",
         .ko = "호스트",
         .pl = "Host",
-        .pt_BR = "Host",
-        .ru = "Хост",
+        .pt = "Host",
+        .ru = "Модель",
+        .tr = "Cihaz",
+        .uk = "Хост",
+        .vi = "Máy chủ",
         .zh_CN = "主机",
         .zh_TW = "主機",
     },

@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <libgen.h>
 
 #if __FreeBSD__
     #include <sys/sysctl.h>
@@ -15,7 +16,6 @@
 #elif __OpenBSD__
     #include <sys/param.h>
     #include <sys/sysctl.h>
-    #include <kvm.h>
 #elif __sun
     #include <procfs.h>
 #elif __NetBSD__
@@ -73,6 +73,10 @@ static const char* parseEnv(void) {
 
     if (getenv("SWAYSOCK") != nullptr) {
         return "Sway";
+    }
+
+    if (getenv("COSMIC_VERSION") != nullptr) {
+        return "COSMIC";
     }
 
 #if __linux__ && !__ANDROID__
@@ -310,25 +314,33 @@ static const char* getFromProcesses(FFDisplayServerResult* result) {
         }
     }
 #elif __OpenBSD__
-    kvm_t* kd = kvm_open(nullptr, nullptr, nullptr, KVM_NO_FILES, nullptr);
-    int count = 0;
-    const struct kinfo_proc* proc = kvm_getprocs(kd, KERN_PROC_UID, (int) userId, sizeof(*proc), &count);
-    if (proc) {
-        for (int i = 0; i < count; ++i) {
-            if (result->dePrettyName.length == 0) {
-                applyPrettyNameIfDE(result, proc[i].p_comm);
-            }
+    int request[] = { CTL_KERN, KERN_PROC, KERN_PROC_UID, (int) userId, (int) sizeof(struct kinfo_proc), 0 };
+    size_t length = 0;
 
-            if (result->wmPrettyName.length == 0) {
-                applyNameIfWM(result, proc[i].p_comm);
-            }
+    if (sysctl(request, ARRAY_SIZE(request), nullptr, &length, nullptr, 0) != 0) {
+        return "sysctl({CTL_KERN, KERN_PROC, KERN_PROC_UID}, nullptr) failed";
+    }
 
-            if (result->dePrettyName.length > 0 && result->wmPrettyName.length > 0) {
-                break;
-            }
+    FF_AUTO_FREE struct kinfo_proc* procs = (struct kinfo_proc*) malloc(length);
+    request[5] = (int) (length / sizeof(struct kinfo_proc)); // count must be non-zero for data fetch
+    if (sysctl(request, ARRAY_SIZE(request), procs, &length, nullptr, 0) != 0) {
+        return "sysctl({CTL_KERN, KERN_PROC, KERN_PROC_UID}, procs) failed";
+    }
+
+    int count = (int) (length / sizeof(struct kinfo_proc));
+    for (int i = 0; i < count; ++i) {
+        if (result->dePrettyName.length == 0) {
+            applyPrettyNameIfDE(result, procs[i].p_comm);
+        }
+
+        if (result->wmPrettyName.length == 0) {
+            applyNameIfWM(result, procs[i].p_comm);
+        }
+
+        if (result->dePrettyName.length > 0 && result->wmPrettyName.length > 0) {
+            break;
         }
     }
-    kvm_close(kd);
 #elif __sun
     FF_AUTO_CLOSE_DIR DIR* procdir = opendir("/proc");
     if (procdir == nullptr) {
@@ -376,48 +388,60 @@ static const char* getFromProcesses(FFDisplayServerResult* result) {
     }
 
     FF_STRBUF_AUTO_DESTROY procPath = ffStrbufCreateA(64);
-    ffStrbufAppendS(&procPath, "/proc/");
-
-    uint32_t procPathLength = procPath.length;
-
-    FF_STRBUF_AUTO_DESTROY loginuid = ffStrbufCreate();
-    FF_STRBUF_AUTO_DESTROY processName = ffStrbufCreateA(256); // Some processes have large command lines (looking at you chrome)
+    int procfd = dirfd(procdir);
 
     struct dirent* dirent;
     while ((dirent = readdir(procdir)) != nullptr) {
         // Match only folders starting with a number (the pid folders)
-        if (dirent->d_type != DT_DIR || !ffCharIsDigit(dirent->d_name[0])) {
+        if ((dirent->d_type != DT_DIR && dirent->d_type != DT_UNKNOWN) || !ffCharIsDigit(dirent->d_name[0])) {
             continue;
         }
 
-        ffStrbufAppendS(&procPath, dirent->d_name);
+        ffStrbufSetS(&procPath, dirent->d_name);
         uint32_t procFolderPathLength = procPath.length;
 
         // Don't check for processes not owned by the current user.
+        char loginuid[32];
         ffStrbufAppendS(&procPath, "/loginuid");
-        ffReadFileBuffer(procPath.chars, &loginuid);
-        if (ffStrbufToUInt(&loginuid, (uint64_t) -1) != userId) {
-            ffStrbufSubstrBefore(&procPath, procPathLength);
+        ssize_t bytesRead = ffReadFileDataRelative(procfd, procPath.chars, sizeof(loginuid) - 1, loginuid);
+        if (bytesRead <= 0) {
+            continue;
+        }
+        loginuid[bytesRead] = '\0';
+        if (strtol(loginuid, nullptr, 10) != (long) userId) {
             continue;
         }
 
         ffStrbufSubstrBefore(&procPath, procFolderPathLength);
 
-        // We check the cmdline for the process name, because it is not trimmed.
-        ffStrbufAppendS(&procPath, "/cmdline");
-        ffReadFileBuffer(procPath.chars, &processName);
-        ffStrbufTrimRightSpace(&processName);
-        ffStrbufSubstrBeforeFirstC(&processName, '\0'); // Trim the arguments
-        ffStrbufSubstrAfterLastC(&processName, '/');
-
-        ffStrbufSubstrBefore(&procPath, procPathLength);
+        // We check the realpath for the process name
+        ffStrbufAppendS(&procPath, "/exe");
+        char exePath[PATH_MAX];
+        ssize_t exePathLength = readlinkat(procfd, procPath.chars, exePath, sizeof(exePath) - 1);
+        const char* processName;
+        if (exePathLength >= 0) {
+            exePath[exePathLength] = '\0';
+            processName = basename(exePath);
+        } else {
+            ffStrbufSubstrBefore(&procPath, procFolderPathLength);
+            ffStrbufAppendS(&procPath, "/comm");
+            exePathLength = ffReadFileDataRelative(procfd, procPath.chars, sizeof(exePath) - 1, exePath);
+            if (exePathLength <= 0) {
+                continue;
+            }
+            if (exePath[exePathLength - 1] == '\n') {
+                --exePathLength;
+            }
+            exePath[exePathLength] = '\0';
+            processName = exePath;
+        }
 
         if (result->dePrettyName.length == 0) {
-            applyPrettyNameIfDE(result, processName.chars);
+            applyPrettyNameIfDE(result, processName);
         }
 
         if (result->wmPrettyName.length == 0) {
-            applyNameIfWM(result, processName.chars);
+            applyNameIfWM(result, processName);
         }
 
         if (result->dePrettyName.length > 0 && result->wmPrettyName.length > 0) {

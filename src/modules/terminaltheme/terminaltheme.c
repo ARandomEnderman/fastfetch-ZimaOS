@@ -53,6 +53,7 @@ void ffParseTerminalThemeJsonObject(FFTerminalThemeOptions* options, yyjson_val*
     }
 }
 
+[[gnu::cold]]
 void ffGenerateTerminalThemeJsonConfig(FFTerminalThemeOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -95,15 +96,24 @@ FFModuleBaseInfo ffTerminalThemeModuleInfo = {
     .description = "Print the current terminal theme (foreground and background colors)",
     .displayName = {
         .en = "Terminal Theme",
+        .ar = "سمة الطرفية",
+        .cs = "Motiv terminálu",
         .de = "Terminalthema",
         .es = "Tema del terminal",
+        .fi = "Terminaalin Teema",
         .fr = "Thème du terminal",
+        .gl = "Tema do terminal",
+        .he = "ערכת נושא של טרמינל",
+        .id = "Tema Terminal",
         .it = "Tema del terminale",
         .ja = "ターミナルテーマ",
         .ko = "터미널 테마",
         .pl = "Motyw terminala",
-        .pt_BR = "Tema do terminal",
+        .pt = "Tema do terminal",
         .ru = "Тема терминала",
+        .tr = "Terminal Teması",
+        .uk = "Тема терміналу",
+        .vi = "Chủ đề Terminal",
         .zh_CN = "终端主题",
         .zh_TW = "終端機主題",
     },

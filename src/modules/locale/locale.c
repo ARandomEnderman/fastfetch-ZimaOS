@@ -34,6 +34,7 @@ void ffParseLocaleJsonObject(FFLocaleOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateLocaleJsonConfig(FFLocaleOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -71,15 +72,24 @@ FFModuleBaseInfo ffLocaleModuleInfo = {
     .description = "Print system locale name",
     .displayName = {
         .en = "Locale",
+        .ar = "اللغة",
+        .cs = "Národní prostředí",
         .de = "Sprachraum",
         .es = "Configuración regional",
+        .fi = "Alueasetus",
         .fr = "Paramètres régionaux",
+        .gl = "Configuración rexional",
+        .he = "לוקאל",
+        .id = "Lokal",
         .it = "Impostazioni locali",
         .ja = "ロケール",
         .ko = "로케일",
         .pl = "Ustawienia regionalne",
-        .pt_BR = "Configuração regional",
+        .pt = "Configuração regional",
         .ru = "Локаль",
+        .tr = "Yerel Ayar",
+        .uk = "Локаль",
+        .vi = "Bản địa",
         .zh_CN = "语言环境",
         .zh_TW = "語言環境",
     },
@@ -92,5 +102,5 @@ FFModuleBaseInfo ffLocaleModuleInfo = {
     .formatArgs = FF_FORMAT_ARG_LIST(((FFModuleFormatArg[]) {
         { "Locale code", "result" },
     })),
-    .defaultOrder = 53,
+    .defaultOrder = 54,
 };

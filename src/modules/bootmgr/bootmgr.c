@@ -63,6 +63,7 @@ void ffParseBootmgrJsonObject(FFBootmgrOptions* options, yyjson_val* module) {
     }
 }
 
+[[gnu::cold]]
 void ffGenerateBootmgrJsonConfig(FFBootmgrOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
@@ -107,15 +108,24 @@ FFModuleBaseInfo ffBootmgrModuleInfo = {
     .description = "Print second-stage bootloader information (name, firmware, etc.)",
     .displayName = {
         .en = "Boot Manager",
+        .ar = "مدير الإقلاع",
+        .cs = "Správce spouštění",
         .de = "Boot-Manager",
-        .es = "Administrador de arranque",
+        .es = "Gestor de arranque",
+        .fi = "Käynnistyslataaja",
         .fr = "Gestionnaire de démarrage",
+        .gl = "Xestor de arranque",
+        .he = "מנהל אתחול",
+        .id = "Manajer Boot",
         .it = "Gestore di avvio",
         .ja = "ブートマネージャー",
         .ko = "부트 매니저",
         .pl = "Menedżer rozruchu",
-        .pt_BR = "Gerenciador de inicialização",
+        .pt = "Gerenciador de inicialização",
         .ru = "Менеджер загрузки",
+        .tr = "Önyükleme Yöneticisi",
+        .uk = "Менеджер завантаження",
+        .vi = "Trình quản lý khởi động",
         .zh_CN = "启动管理器",
         .zh_TW = "啟動管理器",
     },
